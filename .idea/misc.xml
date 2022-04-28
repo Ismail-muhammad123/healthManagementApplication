@@ -9,6 +9,7 @@
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_doctor_bookings.xml" value="0.1" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_doctor_registration.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_doctors.xml" value="0.22" />
+        <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_insurance.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_message.xml" value="0.17028985507246377" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_patient_registration.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/activity_select_registration.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/layout/bookings_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lenovo/Desktop/projects/hospitalManagement/app/src/main/res/menu/main_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

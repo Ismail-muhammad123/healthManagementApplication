@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HospitalManagement">
         <activity
+            android:name=".Insurance"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="@string/title_activity_insurance"
+            android:theme="@style/Theme.HospitalManagement.Fullscreen" />
+        <activity
             android:name=".AddMessage"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"

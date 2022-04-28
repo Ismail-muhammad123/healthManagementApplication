@@ -28,5 +28,6 @@
     <string name="title_activity_departments">Departments</string>
     <string name="title_activity_message">Message</string>
     <string name="title_activity_add_message">AddMessage</string>
+    <string name="title_activity_insurance">Insurance</string>
 
 </resources>

@@ -3,4 +3,7 @@
     <item
         android:id="@+id/idLogOut"
         android:title="Log Out"/>
+    <item
+        android:id="@+id/insurancePage"
+        android:title="Insurance Registration"/>
 </menu>

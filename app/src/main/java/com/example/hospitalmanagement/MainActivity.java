@@ -126,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id){
+            case R.id.insurancePage:
+                Intent insurancePageIntent = new Intent(MainActivity.this, Insurance.class);
+                startActivity(insurancePageIntent);
+                return true;
+
             case R.id.idLogOut:
                 Toast.makeText(getApplicationContext(), "User Logged out", Toast.LENGTH_SHORT).show();
                 mAuth.signOut();
