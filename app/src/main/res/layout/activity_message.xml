@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="20pt"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.HospitalManagement.FullscreenContainer"
+    tools:context=".Message" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:textStyle="bold"
+        android:textSize="14pt"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Message" />
+
+    <TextView
+        android:id="@+id/messageText"
+        android:textSize="10pt"
+        android:layout_marginTop="5pt"
+        android:layout_marginHorizontal="3pt"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You have no message" />
+</LinearLayout>
