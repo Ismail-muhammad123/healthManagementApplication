@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               String type = snapshot.getValue().toString();
-
+               String type =((java.util.Map) snapshot.getValue()).get("type").toString();
+                println(Log.INFO,"user type:" ,type);
                 allBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (type=="patient"){
+                        if (type.equals("Patient")){
                             Intent allBookingsIntent = new Intent(MainActivity.this, PatientBookings.class);
                             startActivity(allBookingsIntent);
                         } else {
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 messagesBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (type=="patient"){
+                        if (type.equals("Patient")){
                             Intent messageActivity = new Intent(MainActivity.this, Message.class);
                             startActivity(messageActivity);
                         }
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 newBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (type=="patient"){
+                        if (type.equals("Patient")){
                             Intent newAppoint = new Intent(MainActivity.this, BookDoctorActivity.class);
                             startActivity(newAppoint);
                         }
@@ -102,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
             }
 
             @Override
