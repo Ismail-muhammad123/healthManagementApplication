@@ -36,6 +36,7 @@ public class DoctorBookings extends AppCompatActivity  implements MyRecyclerView
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
+    private ArrayList<String> bookings;
     MyRecyclerViewAdapter adapter;
 
 
@@ -46,13 +47,16 @@ public class DoctorBookings extends AppCompatActivity  implements MyRecyclerView
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        databaseReference = firebaseDatabase.getReference("Bookings");
+        databaseReference = firebaseDatabase.getReference().child("Bookings");
 
-        ArrayList<Map> bookings = new ArrayList<>();
-        adapter = new MyRecyclerViewAdapter(this, bookings);
+        bookings = new ArrayList<>();
+        adapter = new MyRecyclerViewAdapter(DoctorBookings.this, bookings);
         adapter.setClickListener(this);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         RecyclerView recyclerView = findViewById(R.id.bookings_cycleView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -60,24 +64,17 @@ public class DoctorBookings extends AppCompatActivity  implements MyRecyclerView
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object fieldsObj = new Object();
                 HashMap fldObj;
-
-                ArrayList<Map> book = new ArrayList<>();
-
+                bookings.clear();
                 for (DataSnapshot bookingData: dataSnapshot.getChildren()) {
-                    try{
-                        HashMap userInfo = new HashMap();
-                        fldObj = (HashMap)bookingData.getValue(fieldsObj.getClass());
-                        userInfo.put("email", fldObj.get("email").toString());
-                        userInfo.put("uid", bookingData.getKey());
-
-                        book.add(userInfo);
-
-                        adapter.notifyItemChanged(0);
-                    }catch (Exception ex){
-                        continue;
-                    }
+                        fldObj = (HashMap) bookingData.getValue(fieldsObj.getClass());
+                    println(Log.INFO, "booking object", fldObj.toString());
+                        Object email = fldObj.get("patEmail");
+                        if (email != null){
+                            bookings.add(email.toString());
+                        }
                 }
-                bookings.addAll(book);
+
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -98,7 +95,7 @@ public class DoctorBookings extends AppCompatActivity  implements MyRecyclerView
     public void onItemClick(View view, int position) {
         Intent addMessage = new Intent(DoctorBookings.this, AddMessage.class);
         String uid = mAuth.getCurrentUser().getUid();
-        addMessage.putExtra("uid", adapter.getItem(position));
+        addMessage.putExtra("email", adapter.getItem(position));
         startActivity(addMessage);
     }
 

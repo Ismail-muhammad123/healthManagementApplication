@@ -57,37 +57,19 @@ public class AddMessage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String messagetxt = messagetext.getText().toString();
-                if (TextUtils.isEmpty(messagetxt)){
+                if (TextUtils.isEmpty(messagetxt)) {
                     messagetext.setError("Message cannot be empty");
                 }
-                String uid = getIntent().getStringExtra("uid");
-                HashMap messageData  = new HashMap();
+                String userEmail = mAuth.getCurrentUser().getEmail();
+                String email = getIntent().getStringExtra("email");
+                Intent intent = new Intent(Intent.ACTION_SEND);
 
-                messageData.put("message", messagetxt);
-
-                databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        databaseReference.updateChildren(messageData).addOnCompleteListener(new OnCompleteListener() {
-                            @Override
-                            public void onComplete(@NonNull Task task) {
-                                if (task.isSuccessful()){
-                                    Toast.makeText((AddMessage.this), "Message Send Successfully", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                                else{
-                                    Toast.makeText(AddMessage.this, "Could not send message at the moment", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, email);
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Message From Hospitl Mangagement App");
+                intent.putExtra(Intent.EXTRA_TEXT, messagetxt);
+                intent.putExtra(Intent.EXTRA_REFERRER, email);
+                startActivity(Intent.createChooser(intent, "Send mail"));
 
             }
         });

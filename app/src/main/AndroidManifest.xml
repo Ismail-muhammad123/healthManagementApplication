@@ -39,12 +39,6 @@
             android:exported="false"
             android:label="@string/title_activity_departments"
             android:theme="@style/Theme.HospitalManagement.Fullscreen" />
-        <activity
-            android:name=".PatientBookings"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_patient_bookings"
-            android:theme="@style/Theme.HospitalManagement.Fullscreen" />
         <activity android:name=".BookDoctorActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".DoctorRegistrationActivity" />

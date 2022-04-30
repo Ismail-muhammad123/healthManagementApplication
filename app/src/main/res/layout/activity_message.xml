@@ -28,4 +28,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="You have no message" />
+
+    <Button
+        android:id="@+id/openInboxBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Inbox" />
 </LinearLayout>

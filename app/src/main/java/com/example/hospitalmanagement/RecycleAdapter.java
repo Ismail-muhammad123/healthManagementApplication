@@ -13,12 +13,12 @@ import java.util.Map;
 
 class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
-    private List<Map> mData;
+    private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, List<Map> data) {
+    MyRecyclerViewAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -33,7 +33,7 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = (String) mData.get(position).get("email");
+        String animal = mData.get(position);
         holder.myTextView.setText(animal);
     }
 
@@ -62,7 +62,7 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
 
     // convenience method for getting data at click position
     String getItem(int position) {
-        return mData.get(position).get("uid").toString();
+        return mData.get(position);
     }
 
     // allows clicks events to be caught

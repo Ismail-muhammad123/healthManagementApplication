@@ -32,14 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button allBtn, newBtn, departmentsBtn, messagesBtn;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         mAuth = FirebaseAuth.getInstance();
         allBtn = findViewById(R.id.allBookingsBtn);
@@ -48,67 +45,41 @@ public class MainActivity extends AppCompatActivity {
         messagesBtn = findViewById(R.id.messages);
         String uid = mAuth.getCurrentUser().getUid();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        allBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               String type =((java.util.Map) snapshot.getValue()).get("type").toString();
-                println(Log.INFO,"user type:" ,type);
-                allBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (type.equals("Patient")){
-                            Intent allBookingsIntent = new Intent(MainActivity.this, PatientBookings.class);
-                            startActivity(allBookingsIntent);
-                        } else {
-                            Intent doctorBookings = new Intent(MainActivity.this, DoctorBookings.class);
-                            startActivity(doctorBookings);
-                        }
-                    }
-                });
-
-                  departmentsBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                            Intent depts = new Intent(MainActivity.this, Departments.class);
-                            startActivity(depts);
-                    }
-                });
-
-
-
-                messagesBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (type.equals("Patient")){
-                            Intent messageActivity = new Intent(MainActivity.this, Message.class);
-                            startActivity(messageActivity);
-                        }
-                        else{
-                            Toast.makeText(MainActivity.this, "This Page is for Patients", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                newBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (type.equals("Patient")){
-                            Intent newAppoint = new Intent(MainActivity.this, BookDoctorActivity.class);
-                            startActivity(newAppoint);
-                        }
-                        else{
-                            Toast.makeText(MainActivity.this, "This Page is for Patients", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onClick(View view) {
+                    Intent doctorBookings = new Intent(MainActivity.this, DoctorBookings.class);
+                    startActivity(doctorBookings);
 
             }
         });
+
+        departmentsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent depts = new Intent(MainActivity.this, Departments.class);
+                startActivity(depts);
+            }
+        });
+
+        messagesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    Intent messageActivity = new Intent(MainActivity.this, Message.class);
+                    startActivity(messageActivity);
+
+            }
+        });
+        newBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent newAppoint = new Intent(MainActivity.this, BookDoctorActivity.class);
+                    startActivity(newAppoint);
+
+            }
+        });
+
 
 
     }

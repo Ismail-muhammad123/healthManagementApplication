@@ -47,7 +47,7 @@ public class BookDoctorActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        databaseReference = firebaseDatabase.getReference("Bookings");
+        databaseReference = firebaseDatabase.getReference().child("Bookings");
 
         btnBookPat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +75,6 @@ public class BookDoctorActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         databaseReference.push().setValue(bookingData);
-
                         Toast.makeText(BookDoctorActivity.this, "Booking Successful", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(BookDoctorActivity.this,MainActivity.class));
                         finish();

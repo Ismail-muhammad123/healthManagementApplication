@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.hospitalmanagement.databinding.ActivityMessageBinding;
@@ -34,50 +36,35 @@ public class Message extends AppCompatActivity {
     TextView messageTxt;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private Button btn;
     FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_message);
 
+        btn = findViewById(R.id.openInboxBtn);
         messageTxt = findViewById(R.id.messageText);
 
-        messageTxt.setText("No Message Found");
+        messageTxt.setText("You Can Access Your Messages Through Your mail Inbox");
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        String uid = mAuth.getCurrentUser().getUid();
-
-
-        databaseReference = firebaseDatabase.getReference().child("users").child(uid);
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Object fieldsObj = new Object();
-                HashMap fldObj;
-
-                try {
-                    fldObj = (HashMap) snapshot.getValue(fieldsObj.getClass());
-
-                    String body = fldObj.get("message").toString();
-
-                    if (TextUtils.isEmpty(body)) {
-                        messageTxt.setText(body);
-                    }
-                } catch (Exception ex) {
-                    // My custom error handler. See 'ErrorHandler' in Gist
-//                ErrorHandler.logError(ex);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_APP_EMAIL);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
+
+
+
     }
 }
